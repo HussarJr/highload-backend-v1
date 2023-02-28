@@ -31,6 +31,9 @@ create table orders_elements (
 	element_id varchar(36) REFERENCES products(id)
 );
 
+ALTER TABLE cart ADD COLUMN id varchar(36) primary key;
+	
+ALTER TABLE orders_elements ADD COLUMN id varchar(36) primary key;
 ```
 ## Connect to project
 ```powershell
