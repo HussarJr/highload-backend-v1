@@ -32,3 +32,9 @@ create table orders_elements (
 );
 
 ```
+## Connect to project
+```powershell
+Scaffold-DbContext "Host=localhost;Port=5432;Database=pr;Username=postgres;Password=19102000"
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+```
