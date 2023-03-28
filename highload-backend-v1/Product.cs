@@ -14,4 +14,8 @@ public partial class Product
     public int? Count { get; set; }
 
     public string? Description { get; set; }
+
+    public virtual ICollection<Cart> Carts { get; } = new List<Cart>();
+
+    public virtual ICollection<OrdersElement> OrdersElements { get; } = new List<OrdersElement>();
 }

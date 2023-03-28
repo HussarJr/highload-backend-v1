@@ -12,4 +12,6 @@ public partial class Order
     public string? Description { get; set; }
 
     public virtual User? CustomerNavigation { get; set; }
+
+    public virtual ICollection<OrdersElement> OrdersElements { get; } = new List<OrdersElement>();
 }

@@ -33,10 +33,13 @@ public partial class PrContext : DbContext
     {
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("cart");
+            entity.HasKey(e => e.Id).HasName("cart_pkey");
 
+            entity.ToTable("cart");
+
+            entity.Property(e => e.Id)
+                .HasMaxLength(36)
+                .HasColumnName("id");
             entity.Property(e => e.Customer)
                 .HasMaxLength(36)
                 .HasColumnName("customer");
@@ -44,11 +47,11 @@ public partial class PrContext : DbContext
                 .HasMaxLength(36)
                 .HasColumnName("products");
 
-            entity.HasOne(d => d.CustomerNavigation).WithMany()
+            entity.HasOne(d => d.CustomerNavigation).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.Customer)
                 .HasConstraintName("cart_customer_fkey");
 
-            entity.HasOne(d => d.ProductsNavigation).WithMany()
+            entity.HasOne(d => d.ProductsNavigation).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.Products)
                 .HasConstraintName("cart_products_fkey");
         });
@@ -74,10 +77,13 @@ public partial class PrContext : DbContext
 
         modelBuilder.Entity<OrdersElement>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("orders_elements");
+            entity.HasKey(e => e.Id).HasName("orders_elements_pkey");
 
+            entity.ToTable("orders_elements");
+
+            entity.Property(e => e.Id)
+                .HasMaxLength(36)
+                .HasColumnName("id");
             entity.Property(e => e.ElementId)
                 .HasMaxLength(36)
                 .HasColumnName("element_id");
@@ -85,11 +91,11 @@ public partial class PrContext : DbContext
                 .HasMaxLength(36)
                 .HasColumnName("order_id");
 
-            entity.HasOne(d => d.Element).WithMany()
+            entity.HasOne(d => d.Element).WithMany(p => p.OrdersElements)
                 .HasForeignKey(d => d.ElementId)
                 .HasConstraintName("orders_elements_element_id_fkey");
 
-            entity.HasOne(d => d.Order).WithMany()
+            entity.HasOne(d => d.Order).WithMany(p => p.OrdersElements)
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("orders_elements_order_id_fkey");
         });

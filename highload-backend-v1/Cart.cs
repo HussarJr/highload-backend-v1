@@ -9,6 +9,8 @@ public partial class Cart
 
     public string? Products { get; set; }
 
+    public string Id { get; set; } = null!;
+
     public virtual User? CustomerNavigation { get; set; }
 
     public virtual Product? ProductsNavigation { get; set; }

@@ -9,6 +9,8 @@ public partial class OrdersElement
 
     public string? ElementId { get; set; }
 
+    public string Id { get; set; } = null!;
+
     public virtual Product? Element { get; set; }
 
     public virtual Order? Order { get; set; }
